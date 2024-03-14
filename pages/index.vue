@@ -1,55 +1,40 @@
 <template>
-  <v-container fluid class="fill-height justify-center">
-    <v-btn to="/register">To Register</v-btn>
-
-    <v-btn @click="getOtp"> test</v-btn>
+  <v-container fluid class="fill-height">
+    <v-row no-gutters class="justify-center">
+      <StationCard :stations="stations" />
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import StationCard from "@/components/StationCard";
 export default {
+  components: { StationCard },
   data() {
-    return {};
+    return {
+      stations: [],
+    };
+  },
+  mounted() {
+    this.getStations();
   },
   methods: {
-    // async getStasiun() {
-    //   const token =
-    //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTElWRS1DT0RJTkciLCJjcmVhdGVkb24iOiIyMDI0LTAzLTE0IDA5OjA1OjE4In0.q7RSjWJE6kOIkbqzWX6Nl9FB6wkbL0De4fem0MxOQC4";
-    //   this.$axios
-    //     .get(
-    //       "https://reservationdev.railink.co.id:8001/api/service/artsmidapp/middleware/info/get_stasiun",
-    //       {
-    //         headers: {
-    //           token: token,
-    //         },
-    //       }
-    //     )
-    //     .then((response) => {
-    //       console.log(response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error:", error);
-    //     });
-    // },
-    async getOtp() {
-      const otp = 1;
-      const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTElWRS1DT0RJTkciLCJjcmVhdGVkb24iOiIyMDI0LTAzLTE0IDA5OjA1OjE4In0.q7RSjWJE6kOIkbqzWX6Nl9FB6wkbL0De4fem0MxOQC4";
-      this.$axios
-        .get(
-          `https://reservationdev.railink.co.id:8001/api/service/artsmidapp/member/activation?otp=${otp}`,
+    async getStations() {
+      try {
+        const token =
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTElWRS1DT0RJTkciLCJjcmVhdGVkb24iOiIyMDI0LTAzLTE0IDA5OjA1OjE4In0.q7RSjWJE6kOIkbqzWX6Nl9FB6wkbL0De4fem0MxOQC4";
+        const data = await this.$axios.get(
+          `https://reservationdev.railink.co.id:8001/api/service/artsmidapp/middleware/info/get_stasiun`,
           {
             headers: {
               token: token,
             },
           }
-        )
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+        );
+        this.stations = data.data.response.stasiunlist;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

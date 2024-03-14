@@ -26,7 +26,7 @@ export default {
           )
           .then(() => {
             this.$toast.success("Welcome");
-            this.$router.push("/app/");
+            this.$router.push("/");
           });
       } catch (error) {
         console.error("Error:", error);

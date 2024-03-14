@@ -1,10 +1,10 @@
 <template>
   <v-container fluid class="fill-height pa-0">
     <v-row v-if="$device.isDesktop" no-gutters>
-      <v-col cols="6" align="center" style="background-color: white">
+      <v-col cols="6" align="center" class="color1">
         <v-card
           class="color1--text"
-          style="padding-top: 200px"
+          style="margin-top: 200px; padding: 24px"
           flat
           width="400px"
           rounded
