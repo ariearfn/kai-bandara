@@ -45,8 +45,7 @@
       </v-col>
       <v-col cols="6" align="center" class="color1">
         <v-card
-          class="color1--text"
-          style="padding-top: 16px"
+          class="color1--text mt-12"
           flat
           width="400px"
           rounded
@@ -155,7 +154,7 @@
                     <span class="btn-txt" style="color: white">Daftar</span>
                   </v-btn>
                 </v-col>
-                <v-col cols="12" class="text-center pt-6">
+                <v-col cols="12" class="text-center py-4">
                   <v-btn
                     text
                     class="color1--text font-weight-bold text-none"
