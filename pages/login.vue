@@ -17,24 +17,21 @@ export default {
       try {
         const token =
           "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTElWRS1DT0RJTkciLCJjcmVhdGVkb24iOiIyMDI0LTAzLTE0IDA5OjA1OjE4In0.q7RSjWJE6kOIkbqzWX6Nl9FB6wkbL0De4fem0MxOQC4";
-        const response = await this.$axios
-          .post(
-            "https://reservationdev.railink.co.id:8001/api/service/artsmidapp/member/login",
-            data,
-            {
-              headers: {
-                token: token,
-                "Content-Type": "application/json",
-              },
-            }
-          )
+        this.$auth
+          .loginWith("local", {
+            data: data,
+            headers: {
+              token: token,
+              "Content-Type": "application/json",
+            },
+          })
           .then(() => {
-            this.users = response;
+            console.log(this.$auth);
             this.$toast.success("Welcome");
             this.$router.push("/");
           });
       } catch (error) {
-        console.error("Error:", error);
+        this.$toast.error("Error:", error);
       }
     },
   },

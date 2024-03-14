@@ -49,7 +49,7 @@ export default {
     strategies: {
       local: {
         token: {
-          property: "test",
+          property: "data.access_token",
           type: "Bearer",
           global: true,
           maxAge: 86400,
@@ -58,7 +58,7 @@ export default {
           property: "data",
         },
         endpoints: {
-          login: { url: "/api/auth/login", method: "post" },
+          login: { url: "/member/login", method: "post" },
           logout: { url: "/api/auth/logout", method: "get" },
           user: { url: "/api/auth/me", method: "get" },
         },
