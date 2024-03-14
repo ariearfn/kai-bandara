@@ -4,73 +4,75 @@
     class="card-style"
     style="margin-left: 40px; margin-right: 40px"
   >
-    <v-row class="pa-6" no-gutters>
-      <v-col class="" cols="4">
-        <span class="ml-4 color2--text">Origin</span>
-        <v-autocomplete
-          v-model="payload.origin"
-          :items="stations"
-          item-value="id"
-          item-text="name"
-          color="color1"
-          class="mx-4 pt-2 placeholder-custom"
-          outlined
-          elevation="10"
-          placeholder="Select Origin Station"
-          dense
-      /></v-col>
-      <v-col class="" cols="4">
-        <span class="ml-4 color2--text">Destination</span>
-        <v-autocomplete
-          v-model="payload.destination"
-          :items="stations"
-          item-value="id"
-          item-text="name"
-          color="color1"
-          class="mx-4 pt-2 placeholder-custom"
-          outlined
-          elevation="10"
-          placeholder="Select Destination Station"
-          dense
-          :disabled="payload.origin === undefined || payload.origin === ''"
-      /></v-col>
-      <v-col cols="4">
-        <span class="ml-4 grey--text">Total Passenger</span>
-        <v-select
-          v-model="payload.passenger"
-          :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-          color="color1"
-          class="mx-4 pt-2 placeholder-custom"
-          outlined
-          elevation="10"
-          placeholder="-"
-          dense
-        />
-      </v-col>
-      <v-col cols="4">
-        <span class="ml-4 color2--text">Departure Date</span>
-        <v-text-field
-          v-model="payload.departureDate"
-          type="date"
-          color="color1"
-          class="mx-4 pt-2 placeholder-custom"
-          outlined
-          elevation="10"
-          dense
-        />
-      </v-col>
-      <v-col align-self="center" class="text-right">
-        <v-btn
-          class="text-none white--text font-weight-bold"
-          style="border-radius: 10px"
-          elevation="0"
-          color="color2"
-          @click="searchTicket"
-        >
-          Find Ticket
-        </v-btn>
-      </v-col>
-    </v-row>
+    <v-form @submit.prevent="searchTicket(payload)">
+      <v-row class="pa-6" no-gutters>
+        <v-col class="" cols="4">
+          <span class="ml-4 color2--text">Origin</span>
+          <v-autocomplete
+            v-model="payload.origin"
+            :items="stations"
+            item-value="code"
+            item-text="name"
+            color="color1"
+            class="mx-4 pt-2 placeholder-custom"
+            outlined
+            elevation="10"
+            placeholder="Select Origin Station"
+            dense
+        /></v-col>
+        <v-col class="" cols="4">
+          <span class="ml-4 color2--text">Destination</span>
+          <v-autocomplete
+            v-model="payload.destination"
+            :items="stations"
+            item-value="code"
+            item-text="name"
+            color="color1"
+            class="mx-4 pt-2 placeholder-custom"
+            outlined
+            elevation="10"
+            placeholder="Select Destination Station"
+            dense
+            :disabled="payload.origin === undefined || payload.origin === ''"
+        /></v-col>
+        <v-col cols="4">
+          <span class="ml-4 grey--text">Total Passenger</span>
+          <v-select
+            v-model="payload.passenger"
+            :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+            color="color1"
+            class="mx-4 pt-2 placeholder-custom"
+            outlined
+            elevation="10"
+            placeholder="-"
+            dense
+          />
+        </v-col>
+        <v-col cols="4">
+          <span class="ml-4 color2--text">Departure Date</span>
+          <v-text-field
+            v-model="payload.departureDate"
+            type="date"
+            color="color1"
+            class="mx-4 pt-2 placeholder-custom"
+            outlined
+            elevation="10"
+            dense
+          />
+        </v-col>
+        <v-col align-self="center" class="text-right">
+          <v-btn
+            class="text-none white--text font-weight-bold"
+            style="border-radius: 10px"
+            elevation="0"
+            color="color2"
+            type="submit"
+          >
+            Find Ticket
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
   </v-card>
 </template>
 
@@ -83,17 +85,34 @@ export default {
       default: () => [],
     },
   },
+
   data() {
     return {
       payload: {
         passenger: 1,
+        memberCode: 11111,
       },
+      results: [],
     };
   },
   computed: {},
   methods: {
-    searchTicket() {
-      console.log("asdsa");
+    async searchTicket(payload) {
+      try {
+        const token =
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTElWRS1DT0RJTkciLCJjcmVhdGVkb24iOiIyMDI0LTAzLTE0IDA5OjA1OjE4In0.q7RSjWJE6kOIkbqzWX6Nl9FB6wkbL0De4fem0MxOQC4";
+        const data = await this.$axios.get(
+          `https://reservationdev.railink.co.id:8001/api/service/artsmidapp/middleware/schedule/arts_getschedule?org=${payload.origin}&des=${payload.destination}&date=${payload.departureDate}&member_code=${payload.memberCode}`,
+          {
+            headers: {
+              token: token,
+            },
+          }
+        );
+        this.results = data;
+      } catch (error) {
+        this.$toast.error(error);
+      }
     },
   },
 };

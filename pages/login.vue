@@ -7,7 +7,11 @@ import LoginCard from "@/components/LoginCard.vue";
 export default {
   components: { LoginCard },
   layout: "plain",
-
+  data() {
+    return {
+      users: [],
+    };
+  },
   methods: {
     async handleLogin(data) {
       try {
@@ -25,6 +29,7 @@ export default {
             }
           )
           .then(() => {
+            this.users = response;
             this.$toast.success("Welcome");
             this.$router.push("/");
           });

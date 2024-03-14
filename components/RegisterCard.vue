@@ -62,7 +62,6 @@
             </v-row>
             <v-card-text class="py-0">
               <v-row no-gutters class="px-2">
-                {{ credentials }}
                 <v-col cols="12">
                   <v-text-field
                     v-model="credentials.name"

@@ -33,7 +33,7 @@ export default {
         );
         this.stations = data.data.response.stasiunlist;
       } catch (error) {
-        console.log(error);
+        this.$toast.error(error);
       }
     },
   },

@@ -32,9 +32,8 @@ export default {
           }
         )
         .then((response) => {
-          console.log(response.data);
+          this.$toast.success(response);
           this.showOTPForm = true;
-          // this.handleOtp();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -54,13 +53,11 @@ export default {
           }
         );
 
-        // If OTP validation successful, handle accordingly
         if (response.status === 200) {
-          console.log(response);
+          this.$toast.success(response);
         }
       } catch (error) {
-        console.error("OTP validation error:", error);
-        // Handle OTP validation error
+        this.$toast.error("OTP validation error:", error);
       }
     },
   },
