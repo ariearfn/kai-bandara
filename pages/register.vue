@@ -40,13 +40,12 @@ export default {
           console.error("Error:", error);
         });
     },
-    async handleOtp() {
+    async handleOtp(data) {
       const token =
         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTElWRS1DT0RJTkciLCJjcmVhdGVkb24iOiIyMDI0LTAzLTE0IDA5OjA1OjE4In0.q7RSjWJE6kOIkbqzWX6Nl9FB6wkbL0De4fem0MxOQC4";
-      const otp = 123456;
       try {
         const response = await this.$axios.get(
-          `https://reservationdev.railink.co.id:8001/api/service/artsmidapp/member/activation?otp=${otp}`,
+          `https://reservationdev.railink.co.id:8001/api/service/artsmidapp/member/activation?otp=${data}`,
           {
             headers: {
               token: token,

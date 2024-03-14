@@ -32,7 +32,7 @@ export default {
     //     });
     // },
     async getOtp() {
-      const otp = 123456;
+      const otp = 1;
       const token =
         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTElWRS1DT0RJTkciLCJjcmVhdGVkb24iOiIyMDI0LTAzLTE0IDA5OjA1OjE4In0.q7RSjWJE6kOIkbqzWX6Nl9FB6wkbL0De4fem0MxOQC4";
       this.$axios
