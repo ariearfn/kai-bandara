@@ -287,12 +287,12 @@ export default {
       gends: [
         {
           id: 1,
-          char: "L",
+          char: "m",
           text: "Laki-laki",
         },
         {
           id: 2,
-          char: "P",
+          char: "f",
           text: "Perempuan",
         },
       ],
@@ -301,7 +301,9 @@ export default {
       savePw: false,
       dialog: false,
       add: {},
-      credentials: {},
+      credentials: {
+        otp_status: null,
+      },
       reset: {},
       showPassword: false,
     };

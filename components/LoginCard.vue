@@ -22,12 +22,12 @@
               <v-row no-gutters class="px-2 pt-6">
                 <v-col cols="12">
                   <v-text-field
-                    v-model="credentials.username"
+                    v-model="credentials.email"
                     color="color1"
                     class="pt-2"
                     outlined
                     elevation="10"
-                    placeholder="username"
+                    placeholder="Email"
                   />
                 </v-col>
                 <v-col cols="12" class="pt-0">
@@ -40,8 +40,8 @@
                     outlined
                     placeholder="password"
                     :disabled="
-                      credentials.username === undefined ||
-                      credentials.username === ''
+                      credentials.email === undefined ||
+                      credentials.email === ''
                     "
                     @click:append="showPassword = !showPassword"
                   />
@@ -151,12 +151,12 @@
               <v-row no-gutters class="px-2 pt-6">
                 <v-col cols="12">
                   <v-text-field
-                    v-model="credentials.username"
+                    v-model="credentials.email"
                     color="color1"
                     class="pt-2"
                     outlined
                     elevation="10"
-                    placeholder="username"
+                    placeholder="Email"
                   />
                 </v-col>
                 <v-col cols="12" class="pt-0">
@@ -170,8 +170,8 @@
                     rounded
                     placeholder="password"
                     :disabled="
-                      credentials.username === undefined ||
-                      credentials.username === ''
+                      credentials.email === undefined ||
+                      credentials.email === ''
                     "
                     @click:append="showPassword = !showPassword"
                   />
@@ -249,10 +249,10 @@ export default {
   computed: {
     labelButton() {
       if (
-        this.credentials.username === undefined ||
-        this.credentials.username === ""
+        this.credentials.email === undefined ||
+        this.credentials.email === ""
       ) {
-        return "username...";
+        return "email...";
       } else if (
         this.credentials.password === undefined ||
         this.credentials.password === ""
